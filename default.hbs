@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css' integrity='sha512-eMxdaSf5XW3ZW1wZCrWItO2jZ7A9FhuZfjVdztr7ZsKNOmt6TUMTQgfpNoVRyfPE5S9BC0A4suXzsGSrAOWcoQ==' crossorigin='anonymous' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js' integrity='sha512-D/zaRVk05q6ERt1JgWB49kL6tyerY7a94egaVv6ObiGcw3OCEv0tvoPDEsVqL28HyAZhDd483ix8gkWQGDgEKw==' crossorigin='anonymous' ></script>
+    <style type="text/css">
+        .tns-nav {
+          text-align: center;
+          margin: 10px 0;
+        }
+
+        .tns-nav > .tns-nav-active {
+          background: #999;
+        }
+
+        .tns-nav > [aria-controls] {
+          width: 9px;
+          height: 9px;
+          padding: 0;
+          margin: 0 5px;
+          border-radius: 50%;
+          background: #ddd;
+          border: 0;
+        }
+
+        .featured-nav{
+            float:right;
+        }
+
+        .js-featured-prev, .js-featured-next{
+            height: 33px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+    </style>
 
     {{ghost_head}}
 </head>
