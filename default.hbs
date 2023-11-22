@@ -38,6 +38,31 @@
             padding-bottom: 5px;
             cursor: pointer;
         }
+
+        .gh-topic-grid .gh-base-content {
+    display: grid;
+    grid-template-columns: repeat(200px, 1fr);
+    gap: 10px;
+}
+
+
+
+@media only screen and (min-width: 1200px) {
+    .gh-topic-grid .gh-topic-content.gh-wiki {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px 20px;
+    }
+}
+
+.gh-wiki h6{
+    margin-top:10px;
+}
+
+.featured-card h4{
+    margin-top:10px;
+}
+
     </style>
 
     {{ghost_head}}

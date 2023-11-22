@@ -72,6 +72,18 @@ body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img +
     gap: 32px 40px;
 }
 
+.gh-topic-grid .gh-topic-content.gh-wiki {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px 40px;
+}
+
+.gh-topic-grid .gh-base-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
 body:not(.home-template) .gh-topic-grid .gh-topic-content {
     row-gap: 48px;
     justify-items: center;
@@ -819,7 +831,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 }
 
 @media (max-width: 991px) {
-    .gh-topic-grid .gh-topic-content {
+    .gh-topic-grid .gh-topic-content,
+    .gh-topic-grid .gh-base-content {
         grid-template-columns: 1fr;
     }
 
