@@ -1,0 +1,100 @@
+<article class="gh-card {{post_class}}{{#match has_large_post "!=" false}}{{#has index="0"}} large{{/has}}{{/match}}">
+    <a class="gh-card-link" href="{{url}}">
+        {{#if feature_image}}
+            <figure class="gh-card-image">
+                <img
+                    srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 720w,
+                            {{img_url feature_image size="l"}} 960w,
+                            {{img_url feature_image size="xl"}} 1200w,
+                            {{img_url feature_image size="xxl"}} 2000w"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    src="{{img_url feature_image size="m"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                >
+            </figure>
+        {{/if}}
+
+        <div class="gh-card-wrapper">
+            <header class="gh-card-header">
+                <h3 class="gh-card-title">{{title}}</h3>
+            </header>
+
+            {{#if excerpt}}
+                {{#is "home"}}
+                    {{#has index="0"}}
+                        <div class="gh-card-excerpt">{{excerpt}}</div>
+                    {{/has}}
+                {{else}}
+                    <div class="gh-card-excerpt">{{excerpt}}</div>
+                {{/is}}
+            {{/if}}
+
+            <footer class="gh-card-footer">
+                <span class="gh-card-author">{{#foreach authors}}{{#if @first}}{{name}}{{else}}, {{name}}{{/if}}{{/foreach}}</span>
+                <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+                {{#if @site.comments_enabled}}
+                    {{comment_count class="gh-card-comments"}}
+                {{/if}}
+            </footer>
+        </div>
+    </a>
+</article>
+
+{{#has index="0"}} 
+<article class="gh-card large">
+  {{#get 'posts' filter='featured:true' limit='all' as |featured|}}
+      <h2 class="gh-topic-name" style="margin-bottom: 0px; display: inline-block;">
+          FEATURED
+      </h2>
+      <div class="featured-nav">
+          <button type="button" role="presentation" class="owl-prev js-featured-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="currentColor"><path d="M20.547 22.107L14.44 16l6.107-6.12L18.667 8l-8 8 8 8 1.88-1.893z"></path></svg></button>
+          <button type="button" role="presentation" class="owl-next js-featured-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="currentColor"><path d="M11.453 22.107L17.56 16l-6.107-6.12L13.333 8l8 8-8 8-1.88-1.893z"></path></svg></button>
+      </div>
+    <div class='featured-feed js-featured-feed'>
+
+      {{#foreach featured visibility='all'}}
+        <div class='featured-card'>
+          {{! Feature Image }}
+          {{#if feature_image}}
+            <a
+              class='featured-card__media m-b-sm'
+              href='{{url}}'
+              title='{{title}}'
+              aria-label='{{title}}'
+            >
+              <img
+                class='lazyload'
+                srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 720w,
+                      {{img_url feature_image size="l"}} 960w,
+                      {{img_url feature_image size="xl"}} 1200w,
+                      {{img_url feature_image size="xxl"}} 2000w"
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              src="{{img_url feature_image size="m"}}"
+                alt='{{title}}'
+              />
+            </a>
+          {{/if}}
+
+          {{! Post Title }}
+          <h4 class='fw-600 m-b-0 text-acc-1 text-xl'>
+            <a href='{{url}}' aria-label='{{title}}'>{{title}}</a>
+          </h4>
+        </div>
+      {{/foreach}}
+    </div>
+  {{/get}}
+  {{#contentFor 'scripts'}}
+    <script>
+      const sliderContainer = document.querySelector('.js-featured-feed'); if
+      (sliderContainer) { const slider = tns({ container: sliderContainer, items:
+      3, slideBy: 1, loop: true,                 prevButton: document.querySelector(".js-featured-prev"),
+          nextButton: document.querySelector(".js-featured-next"),
+  autoplay: false, gutter: 32, nav: true,
+      responsive: { 0: { items: 1, }, 768: { items: 2, }, 992: { items: 3, } } });
+      }
+    </script>
+  {{/contentFor}}
+</article>  
+{{/has}}
