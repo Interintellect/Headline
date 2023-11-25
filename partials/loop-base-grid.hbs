@@ -42,8 +42,9 @@
 </article>
 
 {{#has index="0"}} 
-<article class="gh-card large">
-  {{#get 'posts' filter='featured:true' limit='all' as |featured|}}
+<article class="gh-card large">s
+  {{#get 'pages' filter='tags:hash-wiki'  limit='all' as |featured|}}
+
       <h2 class="gh-topic-name" style="margin-bottom: 0px; display: inline-block;">
           FEATURED
       </h2>
