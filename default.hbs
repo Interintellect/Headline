@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+    <link rel="stylesheet" href="{{ asset "built/screen.css" }}">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css' integrity='sha512-eMxdaSf5XW3ZW1wZCrWItO2jZ7A9FhuZfjVdztr7ZsKNOmt6TUMTQgfpNoVRyfPE5S9BC0A4suXzsGSrAOWcoQ==' crossorigin='anonymous' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.3/tocbot.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js' integrity='sha512-D/zaRVk05q6ERt1JgWB49kL6tyerY7a94egaVv6ObiGcw3OCEv0tvoPDEsVqL28HyAZhDd483ix8gkWQGDgEKw==' crossorigin='anonymous' ></script>
     <style type="text/css">
         .tns-nav {
@@ -39,32 +40,88 @@
             cursor: pointer;
         }
 
+
+
+        .js-featured-prev, .js-featured-next {
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+            background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+            background-color:#ffffff;
+            border-radius:24px;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#666666;
+            padding:6px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffffff;
+        }
+
+        .js-featured-prev:hover, .js-featured-next:hover {
+            background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+            background-color:#f6f6f6;
+        }
+
+        .js-featured-prev:active, .js-featured-next:active {
+            position:relative;
+            top:1px;
+        }
+
         .gh-topic-grid .gh-base-content {
-    display: grid;
-    grid-template-columns: repeat(200px, 1fr);
-    gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(200px, 1fr);
+            gap: 10px;
+        }
+
+        @media only screen and (min-width: 1200px) {
+            .gh-topic-grid .gh-topic-content.gh-wiki {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px 20px;
+            }
+        }
+
+        .gh-wiki h6{
+            margin-top:10px;
+        }
+
+        .featured-card h4{
+            margin-top:10px;
+        }
+
+.gh-content {
+    position: relative;
+ }
+
+.gh-toc > .toc-list {
+    position: relative;
 }
 
+.toc-list {
+    overflow: hidden;
+    list-style: none;
+}
 
-
-@media only screen and (min-width: 1200px) {
-    .gh-topic-grid .gh-topic-content.gh-wiki {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px 20px;
+@media (min-width: 1300px) {
+     .gh-sidebar {
+        position: absolute; 
+        top: 0;
+        bottom: 0;
+        margin-top: 4vmin;
+        grid-column: wide-start / main-start; /* Place the TOC to the left of the content */
+    }
+   
+    .gh-toc {
+        position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
+        top: 4vmin;
+        padding-right: 20px;
+        font-size: var(--content-font-size,1.4rem);        
     }
 }
 
-.gh-wiki h6{
-    margin-top:10px;
-}
-
-.featured-card h4{
-    margin-top:10px;
-}
-
-    </style>
-
+.gh-toc .is-active-link::before {
+    background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+} 
+</style>
     {{ghost_head}}
 </head>
 
@@ -163,6 +220,21 @@
 
 <script src="{{asset "built/main.min.js"}}"></script>
 {{{block "scripts"}}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.12.3/tocbot.min.js"></script>
+{{! Initialize Tocbot after you load the script }}
+<script>
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.gh-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.gh-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h2, h3, h4',
+        // Ensure correct positioning
+        hasInnerContainers: true,
+        collapseDepth: 6,
+    });
+</script>
 {{ghost_foot}}
 
 </body>
